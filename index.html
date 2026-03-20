@@ -41,7 +41,6 @@
         <li><a href="#producao">Produção e pós-deploy</a></li>
         <li><a href="#rollback">Rollback e monitoramento</a></li>
         <li><a href="#regras">Regras fixas</a></li>
-        <li><a href="#checklist">Checklist final</a></li>
       </ol>
     </nav>
 
@@ -139,7 +138,7 @@
       <div class="code-block">
         <div class="code-head">
           <span class="dots"><i></i><i></i><i></i></span>
-          <span>Checklist final de ambiente</span>
+          <span>Verificacao final de ambiente</span>
           <span class="lang">bash</span>
         </div>
         <pre><code>git --version
@@ -245,9 +244,7 @@ Crie um PRD.md com todo o prompt</code></pre>
 
       <article class="card">
         <h3>Proximo passo no Windows Explorer</h3>
-        <ul class="checklist checklist-inline" data-checklist>
-          <li><span class="task-toggle" aria-hidden="true"></span><span>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</span></li>
-        </ul>
+        <p>Agora crie uma pasta com o nome do projeto no Windows Explorer e salve dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</p>
       </article>
     </section>
 
@@ -568,12 +565,12 @@ npx supabase db push</code></pre>
         O template recomenda aplicar as migrations em produção sempre após o deploy.
       </div>
 
-      <ul class="checklist" data-checklist>
-        <li><span class="check"></span><span>Testar login</span></li>
-        <li><span class="check"></span><span>Criar item</span></li>
-        <li><span class="check"></span><span>Editar item</span></li>
-        <li><span class="check"></span><span>Excluir item</span></li>
-        <li><span class="check"></span><span>Logout</span></li>
+      <ul>
+        <li>Testar login</li>
+        <li>Criar item</li>
+        <li>Editar item</li>
+        <li>Excluir item</li>
+        <li>Logout</li>
       </ul>
     </section>
 
@@ -645,28 +642,6 @@ npx supabase db push</code></pre>
       </blockquote>
     </section>
 
-    <section id="checklist">
-      <div class="eyebrow">Checklist final</div>
-      <h2>Quando considerar o projeto realmente pronto</h2>
-      <p class="section-sub">O fechamento só acontece quando ambiente, processo, banco e publicação foram todos validados.</p>
-
-      <ul class="checklist" data-checklist>
-        <li><span class="check"></span><span>Windows preparado e ferramentas verificadas</span></li>
-        <li><span class="check"></span><span>Contas do projeto e e-mail dedicado configurados</span></li>
-        <li><span class="check"></span><span>Supabase HML e PROD criados separadamente</span></li>
-        <li><span class="check"></span><span>Especificação do WebApp criada antes do código</span></li>
-        <li><span class="check"></span><span>Protótipo visual validado</span></li>
-        <li><span class="check"></span><span>Repositório com <strong>main</strong> e <strong>develop</strong></span></li>
-        <li><span class="check"></span><span>Supabase CLI configurado por projeto</span></li>
-        <li><span class="check"></span><span>Migrations versionadas e aplicadas corretamente</span></li>
-        <li><span class="check"></span><span>Homologação validada por preview e PR</span></li>
-        <li><span class="check"></span><span>Produção publicada e fluxo pós-deploy testado</span></li>
-      </ul>
-
-      <div class="callout ok">
-        Quando todos esses pontos estiverem fechados, o template virou uma operação real de CI/CD para WebApps.
-      </div>
-    </section>
   </main>
   <script src="assets/js/main.js" defer></script>
 </body>

@@ -10,8 +10,6 @@ const CHECK_ICON = `
   </svg>
 `;
 
-const CHECKLIST_STORAGE_KEY = "template-aula-checklist-state-v3";
-
 function setCopyButtonIdleState(button) {
   button.innerHTML = COPY_ICON;
   button.classList.remove("copied");
@@ -84,101 +82,6 @@ function initCopyButtons() {
   });
 }
 
-function loadChecklistState() {
-  try {
-    return JSON.parse(localStorage.getItem(CHECKLIST_STORAGE_KEY) || "{}");
-  } catch (error) {
-    return {};
-  }
-}
-
-function persistChecklistState(state) {
-  try {
-    localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(state));
-  } catch (error) {
-    // Ignore storage failures so the checklist still works in memory.
-  }
-}
-
-function ensureChecklistMarkup(item) {
-  let icon = item.querySelector(":scope > .task-toggle, :scope > .check");
-
-  if (!icon) {
-    icon = document.createElement("span");
-    icon.className = "task-toggle";
-    icon.setAttribute("aria-hidden", "true");
-    item.prepend(icon);
-  }
-
-  let label = item.querySelector(":scope > .task-label");
-
-  if (!label) {
-    label = document.createElement("span");
-    label.className = "task-label";
-
-    Array.from(item.childNodes).forEach((node) => {
-      if (node !== icon) {
-        label.appendChild(node);
-      }
-    });
-
-    item.appendChild(label);
-  }
-
-  return { icon, label };
-}
-
-function syncChecklistItem(item, icon, checked) {
-  item.classList.toggle("checked", checked);
-  item.setAttribute("aria-checked", String(checked));
-  icon.textContent = checked ? "✓" : "";
-}
-
-function getChecklistItemKey(item, listIndex, itemIndex) {
-  const section = item.closest("section");
-  const sectionId = section ? section.id : "global";
-  const label = item.textContent.replace(/\s+/g, " ").trim();
-  return `${sectionId}:${listIndex}:${itemIndex}:${label}`;
-}
-
-function initChecklists() {
-  const checklistState = loadChecklistState();
-  const lists = document.querySelectorAll("[data-checklist]");
-
-  lists.forEach((list, listIndex) => {
-    const items = Array.from(list.children).filter((child) => child.tagName === "LI");
-
-    items.forEach((item, itemIndex) => {
-      const { icon } = ensureChecklistMarkup(item);
-      const key = getChecklistItemKey(item, listIndex, itemIndex);
-      const initialChecked = Boolean(checklistState[key]);
-
-      item.classList.add("task-item");
-      item.setAttribute("role", "checkbox");
-      item.setAttribute("tabindex", "0");
-      item.setAttribute("title", "Clique para marcar ou desmarcar");
-
-      syncChecklistItem(item, icon, initialChecked);
-
-      const toggleItem = () => {
-        const nextValue = !item.classList.contains("checked");
-        checklistState[key] = nextValue;
-        syncChecklistItem(item, icon, nextValue);
-        persistChecklistState(checklistState);
-      };
-
-      item.addEventListener("click", toggleItem);
-      item.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          toggleItem();
-        }
-      });
-    });
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   initCopyButtons();
-  initChecklists();
 });
