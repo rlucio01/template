@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia CI/CD para WebApps</title>
+  <style>
+    :root {
+      --accent: #00ffa7;
+      --accent-soft: #9ff5c8;
+      --accent-faint: rgba(0, 255, 167, 0.08);
+      --bg: #050812;
+      --bg-top: #0d1a2e;
+      --surface: #0b1225;
+      --surface-2: #111a30;
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #dde9f5;
+      --muted: #7a9bb5;
+      --info: #4da6ff;
+      --warn: #ffb84d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #3f3f46 transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent-soft);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    header {
+      padding: 72px 24px 56px;
+      text-align: center;
+      background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg) 62%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 255, 167, 0.35);
+      background: rgba(0, 255, 167, 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.08;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-stamp {
+      display: block;
+      width: min(220px, 42vw);
+      height: auto;
+      margin: 0 auto 22px;
+      filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.28));
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 28px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .meta strong {
+      color: var(--accent-soft);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+
+    .toc,
+    .card,
+    .code-block,
+    .timeline-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .toc {
+      padding: 24px 26px;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow,
+    .toc h2,
+    .card h3 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .toc h2 {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 22px;
+    }
+
+    section {
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    section h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.18;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      margin-bottom: 24px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+    }
+
+    p, ul, ol {
+      margin-bottom: 18px;
+    }
+
+    ul, ol {
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: #fff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .card h3 {
+      color: var(--accent-soft);
+      margin-bottom: 12px;
+    }
+
+    .callout {
+      padding: 16px 18px;
+      border-left: 3px solid;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .callout.info {
+      background: rgba(77, 166, 255, 0.08);
+      border-color: var(--info);
+      color: #abd6ff;
+    }
+
+    .callout.warn {
+      background: rgba(255, 184, 77, 0.08);
+      border-color: var(--warn);
+      color: #ffd8a5;
+    }
+
+    .callout.ok {
+      background: var(--accent-faint);
+      border-color: var(--accent);
+      color: var(--accent-soft);
+    }
+
+    .code-block {
+      overflow: hidden;
+      margin: 22px 0;
+    }
+
+    .code-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 13px;
+      color: #8ab4d8;
+    }
+
+    .dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .dots i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .dots i:nth-child(1) { background: #ff5f56; }
+    .dots i:nth-child(2) { background: #ffbd2e; }
+    .dots i:nth-child(3) { background: #27c93f; }
+
+    .lang {
+      margin-left: auto;
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .copy-btn {
+      margin-left: 10px;
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--accent-soft);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(0, 255, 167, 0.1);
+      border-color: rgba(0, 255, 167, 0.35);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      background: rgba(0, 255, 167, 0.14);
+      border-color: rgba(0, 255, 167, 0.45);
+      color: var(--accent);
+    }
+
+    .copy-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 18px;
+      background: var(--surface);
+    }
+
+    code {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.92em;
+      color: #c9d8ee;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding: 20px;
+    }
+
+    .timeline-item h3 {
+      color: #fff;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .steps {
+      list-style: none;
+      padding-left: 0;
+      counter-reset: step;
+      margin: 24px 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps li:last-child {
+      border-bottom: 0;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .inline-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+
+    .soft-box {
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .checklist li:last-child {
+      border-bottom: 0;
+    }
+
+    .checklist li:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .checklist li.checked {
+      color: var(--accent-soft);
+    }
+
+    .checklist li.checked span:last-child {
+      text-decoration: line-through;
+      text-decoration-color: rgba(0, 255, 167, 0.45);
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      margin-top: 5px;
+      border-radius: 999px;
+      background: rgba(0, 255, 167, 0.15);
+      border: 1px solid rgba(0, 255, 167, 0.4);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 11px;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .checklist li.checked .check {
+      background: rgba(0, 255, 167, 0.22);
+      border-color: rgba(0, 255, 167, 0.8);
+      transform: scale(1.05);
+    }
+
+    .task-item {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 8px 10px;
+      margin-left: -10px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .task-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .task-item.checked {
+      color: var(--accent-soft);
+    }
+
+    .task-item.checked .task-label {
+      text-decoration: line-through;
+      text-decoration-color: rgba(0, 255, 167, 0.45);
+    }
+
+    .task-toggle {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      margin-top: 3px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 255, 167, 0.35);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .task-item.checked .task-toggle {
+      background: rgba(0, 255, 167, 0.18);
+      border-color: rgba(0, 255, 167, 0.8);
+      transform: scale(1.04);
+    }
+
+    .task-label {
+      flex: 1;
+      min-width: 0;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 44px 0;
+    }
+
+    blockquote {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      background: var(--accent-faint);
+      color: #c8ffe1;
+      font-style: italic;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        font-size: 17px;
+      }
+
+      .toc ol,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding-inline: 18px;
+      }
+
+      .container {
+        padding-inline: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img class="hero-stamp" src="Selo aprovado com caricatura alegre.png" alt="Selo aprovado com caricatura alegre">
+    <div class="badge">Template · CI/CD para WebApps</div>
+    <h1>Do Zero ao <span>Deploy em Produção</span></h1>
+    <p class="hero-copy">
+      Um guia simples para transformar o template de CI/CD em uma página clara, visual e navegável.
+      O foco aqui é mostrar o fluxo completo: preparação, versionamento, homologação, produção e validação final.
+    </p>
+    <div class="meta">
+      <span>Objetivo <strong>WebApp real e publicável</strong></span>
+      <span>Stack <strong>Antigravity + Git + Supabase + Vercel</strong></span>
+      <span>Formato <strong>Passo a passo visual</strong></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc">
+      <h2>Nesta página</h2>
+      <ol>
+        <li><a href="#visao-geral">Visão geral</a></li>
+        <li><a href="#pre-requisitos">Pré-requisitos</a></li>
+        <li><a href="#isolamento">Isolamento do projeto</a></li>
+        <li><a href="#prototipacao">Prototipação visual</a></li>
+        <li><a href="#ideacao">Ideação com IA</a></li>
+        <li><a href="#especificacao">Especificação técnica</a></li>
+        <li><a href="#antigravity">Antigravity e MCP</a></li>
+        <li><a href="#versionamento">Código e versionamento</a></li>
+        <li><a href="#supabase-cli">Supabase CLI</a></li>
+        <li><a href="#banco">Banco e migrations</a></li>
+        <li><a href="#stack">Stack e estrutura</a></li>
+        <li><a href="#homologacao">Homologação e CI/CD</a></li>
+        <li><a href="#producao">Produção e pós-deploy</a></li>
+        <li><a href="#rollback">Rollback e monitoramento</a></li>
+        <li><a href="#regras">Regras fixas</a></li>
+        <li><a href="#checklist">Checklist final</a></li>
+      </ol>
+    </nav>
+
+    <section id="visao-geral">
+      <div class="eyebrow">Objetivo</div>
+      <h2>Construir um WebApp real com processo profissional</h2>
+      <p class="section-sub">O template não trata só de deploy. Ele organiza a jornada inteira: máquina, contas, escopo, banco, branches, homologação e produção.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Resultado esperado</h3>
+          <ul>
+            <li class="no-task">Ambientes isolados para <strong>HML</strong> e <strong>PROD</strong></li>
+            <li class="no-task">Versionamento correto com <strong>main</strong> e <strong>develop</strong></li>
+            <li class="no-task">Deploy profissional e rastreável</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Regra principal</h3>
+          <ul>
+            <li class="no-task">Cada projeto é independente</li>
+            <li class="no-task">Cada ambiente é seguro e separado</li>
+            <li class="no-task">Produção é consequência do processo</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="pre-requisitos">
+      <div class="eyebrow">Etapa 1</div>
+      <h2>Pré-requisitos no Windows do zero</h2>
+      <p class="section-sub">A preparação do ambiente vem antes do código para evitar falhas de permissão, certificados e ferramentas incompletas.</p>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <h3>Atualizar o Windows</h3>
+          <ul>
+            <li>Executar Windows Update</li>
+            <li>Reiniciar o computador</li>
+          </ul>
+        </article>
+        <div class="callout ok">
+          Isso ajuda a reduzir risco de erros de permissão e certificados.
+        </div>
+        <article class="timeline-item">
+          <h3>Instalar navegador moderno</h3>
+          <p>Escolha um navegador principal para usar nas plataformas do projeto.</p>
+          <ul>
+            <li>Instalar um navegador moderno</li>
+          </ul>
+          <div class="inline-links">
+            <a href="https://www.google.com/chrome" target="_blank" rel="noopener">Chrome</a>
+            <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener">Edge</a>
+            <a href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener">Firefox</a>
+            <a href="https://www.opera.com/download" target="_blank" rel="noopener">Opera</a>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <h3>Criar contas do projeto</h3>
+          <p>Crie uma conta de serviço no <a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a> para o projeto. Essa conta deve ser usada no <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>. Os demais serviços podem usar contas particulares, se fizer sentido na sua operação.</p>
+          <ul>
+            <li><a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a></li>
+            <li><a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a></li>
+            <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
+            <li><a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Ferramentas base</h3>
+          <ul>
+            <li><a href="https://git-scm.com/download/win" target="_blank" rel="noopener"><strong>Git</strong></a> com instalação padrão</li>
+            <li><a href="https://nodejs.org/" target="_blank" rel="noopener"><strong>Node.js LTS</strong></a>, não a versão Current</li>
+            <li><a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701" target="_blank" rel="noopener"><strong>Windows Terminal</strong></a> recomendado</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Ferramentas de trabalho</h3>
+          <ul>
+            <li><a href="https://antigravity.google/" target="_blank" rel="noopener"><strong>Antigravity</strong></a> como ambiente principal</li>
+            <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener"><strong>Docker Desktop</strong></a> com WSL 2</li>
+            <li>Reiniciar a máquina após o Docker</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Checklist final de ambiente</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git --version
+node -v
+npm -v
+docker --version</code></pre>
+      </div>
+    </section>
+
+    <section id="isolamento">
+      <div class="eyebrow">Etapa 2</div>
+      <h2>Isolamento total do projeto</h2>
+      <p class="section-sub">Antes de telas e código, o template pede isolamento completo de identidade e infraestrutura.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>E-mail exclusivo do projeto</h3>
+          <p>Ferramenta sugerida: <a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a>.</p>
+          <div class="soft-box">
+            <code>todoapp.dev@proton.me</code>
+          </div>
+          <ul>
+            <li class="no-task">Separação total entre projetos</li>
+            <li class="no-task">Facilidade de acesso futuro</li>
+            <li class="no-task">Mais segurança operacional</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Projetos no Supabase</h3>
+          <p><a href="https://supabase.com/dashboard/projects" target="_blank" rel="noopener">Criar dois projetos separados</a>.</p>
+          <ul>
+            <li class="no-task"><strong>Supabase Homologação</strong></li>
+            <li class="no-task"><strong>Supabase Produção</strong></li>
+            <li class="no-task">Nunca reutilizar o mesmo projeto Supabase</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="callout warn">
+        Homologação e produção não devem compartilhar a mesma instância de banco.
+      </div>
+    </section>
+
+    <section id="ideacao">
+      <div class="eyebrow">Etapa 4</div>
+      <h2>Ideação com IA sem escrever código</h2>
+      <p class="section-sub">Essa etapa define escopo funcional, estrutura de telas, regras de negócio e base de infraestrutura.</p>
+
+      <p>Ferramenta sugerida: <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Prompt de especificação inicial</span>
+          <span class="lang">prompt</span>
+        </div>
+        <pre><code>Crie a especificação de um webapp simples de To Do List.
+Inclua:
+- Funcionalidades principais
+- Estrutura de telas
+- Regras de negócio
+- Estrutura inicial de banco de dados
+Infraestrutura:
+- Supabase: Banco de Dados, Storage e Autenticação
+- Vercel: Deploy
+Crie um PRD.md com todo o prompt</code></pre>
+      </div>
+
+      <div class="callout ok">
+        Aqui nasce o escopo funcional, não a implementação.
+      </div>
+      <div class="callout warn">
+        Bonus opcional: se quiser acelerar a escrita por voz durante essa etapa, instale o
+        <a href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>
+        para transcricao de voz.
+      </div>
+
+      <article class="card">
+        <h3>Proximo passo no Windows Explorer</h3>
+        <p>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</p>
+      </article>
+    </section>
+
+    <section id="especificacao">
+      <div class="eyebrow">Especificação</div>
+      <h2>O exemplo completo de WebApp presente no template</h2>
+      <p class="section-sub">O Markdown original usa um To-Do App como exemplo completo de produto e detalha funcionalidades, telas, regras, banco e segurança.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Funcionalidades</h3>
+          <ul>
+            <li class="no-task">Login, cadastro, logout e recuperação de senha</li>
+            <li class="no-task">CRUD de tarefas com prioridade, vencimento e anexos</li>
+            <li class="no-task">Filtros por status, prioridade e categoria</li>
+            <li class="no-task">Busca por título e descrição</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Telas</h3>
+          <ul>
+            <li class="no-task">Tela de autenticação</li>
+            <li class="no-task">Dashboard principal</li>
+            <li class="no-task">Modal de nova tarefa e edição</li>
+            <li class="no-task">Fluxos de categorias e anexos</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Regras de negócio</h3>
+          <ul>
+            <li class="no-task">Título obrigatório com limites de tamanho</li>
+            <li class="no-task">Senha mínima de 6 caracteres</li>
+            <li class="no-task">Validação de datas e duplicidade</li>
+            <li class="no-task">Categorias padrão no primeiro login</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Segurança</h3>
+          <ul>
+            <li class="no-task">RLS em <code>profiles</code>, <code>categories</code> e <code>tasks</code></li>
+            <li class="no-task">Bucket privado para anexos</li>
+            <li class="no-task">Policies por usuário em banco e storage</li>
+            <li class="no-task">Autenticação gerenciada pelo Supabase Auth</li>
+          </ul>
+        </article>
+      </div>
+
+    </section>
+
+    <section id="prototipacao">
+      <div class="eyebrow">Etapa 3</div>
+      <h2>Prototipação visual e design system</h2>
+      <p class="section-sub">O template manda buscar inspiração, extrair padrões visuais e validar UX antes do backend.</p>
+
+      <div class="steps">
+        <li>Usar o <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a> para buscar referências visuais</li>
+        <li>Identificar paleta, tipografia, espaçamento e componentes</li>
+        <li>Criar o protótipo no <a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a>(Opcional)</li>
+        <li>Validar fluxo das telas sem backend e sem deploy</li>
+      </div>
+
+      <div class="callout ok">
+        Primeiro a UX, depois o código. Essa ordem reduz retrabalho.
+      </div>
+    </section>
+
+    <section id="versionamento">
+      <div class="eyebrow">Etapa 6</div>
+      <h2>Código base e versionamento correto</h2>
+      <p class="section-sub">Com o escopo e o visual definidos, o projeto entra em Git com uma estrutura de branches profissional.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Inicialização do repositório</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git init
+git branch -M main
+git remote add origin https://github.com/USER/REPO.git
+git add .
+git commit -m "chore: initial project structure"
+git push -u origin main</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Branch de homologação e identificação</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git checkout -b develop
+git push -u origin develop
+
+git config user.name "Seu Nome"
+git config user.email "seu-email-da-conta-atual@exemplo.com"</code></pre>
+      </div>
+
+      <ul>
+        <li><strong>main</strong> representa produção</li>
+        <li><strong>develop</strong> representa homologação</li>
+      </ul>
+    </section>
+
+    <section id="antigravity">
+      <div class="eyebrow">Etapa 5</div>
+      <h2>Desenvolvimento no Antigravity e uso do MCP</h2>
+      <p class="section-sub">O Antigravity é o ambiente principal de trabalho, e o MCP do Supabase conecta a rotina ao ambiente de homologação.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Antigravity</h3>
+          <ul>
+            <li>Abrir o projeto no <a href="https://antigravity.google/" target="_blank" rel="noopener">Antigravity</a></li>
+            <li>Usar esse ambiente como centro do desenvolvimento diário</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>MCP do Supabase</h3>
+          <ul>
+            <li>Conectar ao Supabase de homologação</li>
+            <li>Alinhar MCP e CLI para o mesmo ambiente</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="inline-links">
+        <a href="https://supabase.com/docs/guides/ai/mcp" target="_blank" rel="noopener">MCP Supabase</a>
+        <a href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">Supabase Auth</a>
+      </div>
+    </section>
+
+    <section id="supabase-cli">
+      <div class="eyebrow">Etapa 7</div>
+      <h2>Configuração correta do Supabase CLI</h2>
+      <p class="section-sub">O template enfatiza que o Supabase CLI não é global. Ele deve ser inicializado dentro de cada projeto.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Fluxo inicial do Supabase CLI</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>npx supabase init
+npx supabase login
+npx supabase link --project-ref PROJECT_REF_HML</code></pre>
+      </div>
+
+      <div class="callout info">
+        Se começa com <code>npx</code>, pertence ao projeto, não à máquina.
+      </div>
+    </section>
+
+    <section id="banco">
+      <div class="eyebrow">Etapa 8</div>
+      <h2>Banco de dados, migrations e configuração inicial</h2>
+      <p class="section-sub">Além do CLI, o template traz a lógica de configuração inicial do Supabase, variáveis de ambiente e fluxos de autenticação e CRUD.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Gerar, versionar e aplicar migration</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>npx supabase db diff -f create_tasks_table
+git add supabase/migrations
+git commit -m "chore(db): create tasks table"
+npx supabase db push</code></pre>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Supabase Setup</h3>
+          <ol>
+            <li>Criar projeto no Supabase</li>
+            <li>Executar migrations SQL</li>
+            <li>Configurar Storage bucket</li>
+            <li>Habilitar Email Auth</li>
+            <li>Copiar URL e Anon Key</li>
+          </ol>
+        </article>
+        <article class="card">
+          <h3>Fluxos principais</h3>
+          <ol>
+            <li>Usuário acessa login ou signup</li>
+            <li>Supabase Auth gerencia credenciais</li>
+            <li>RLS protege dados por <code>user_id</code></li>
+            <li>Storage recebe anexos por usuário e tarefa</li>
+          </ol>
+        </article>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Variáveis de ambiente</span>
+          <span class="lang">env</span>
+        </div>
+        <pre><code>NEXT_PUBLIC_SUPABASE_URL=your-project-url.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key</code></pre>
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="eyebrow">Arquitetura</div>
+      <h2>Stack tecnológica e estrutura sugerida</h2>
+      <p class="section-sub">O template também deixa claro qual stack faz sentido para um WebApp cloud-native com Supabase e Vercel.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Frontend</h3>
+          <ul>
+            <li>Next.js 14+ com App Router</li>
+            <li>TypeScript</li>
+            <li>Tailwind CSS</li>
+            <li>shadcn/ui ou Radix UI</li>
+            <li>React Hook Form + Zod</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Backend e deploy</h3>
+          <ul>
+            <li>Supabase com PostgreSQL, Auth e Storage</li>
+            <li><code>@supabase/supabase-js</code></li>
+            <li>Vercel com CI/CD automático via Git</li>
+            <li>Variáveis de ambiente seguras</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Estrutura de projeto sugerida</span>
+          <span class="lang">txt</span>
+        </div>
+        <pre><code>todo-app/
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── lib/
+│   ├── hooks/
+│   └── store/
+├── public/
+├── supabase/
+│   ├── migrations/
+│   └── seed.sql
+├── .env.local
+├── next.config.js
+├── tailwind.config.js
+└── package.json</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Client Supabase</span>
+          <span class="lang">tsx</span>
+        </div>
+        <pre><code>import { createClientComponentClient } from '@supabase/ssr'
+import type { Database } from '@/lib/types'
+
+export const supabase = createClientComponentClient&lt;Database&gt;()</code></pre>
+      </div>
+    </section>
+
+    <section id="homologacao">
+      <div class="eyebrow">Etapas 9 e 10</div>
+      <h2>Homologação com CI/CD e Pull Request</h2>
+      <p class="section-sub">Depois do desenvolvimento, a validação acontece via preview na Vercel e revisão do PR.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Commit e push para develop</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git add .
+git commit -m "feat: todo list funcional"
+git push origin develop</code></pre>
+      </div>
+
+      <div class="soft-box">
+        O push em <strong>develop</strong> faz a Vercel criar um preview, um ambiente isolado e a build de homologação.
+      </div>
+
+      <div class="inline-links">
+        <a href="https://vercel.com/docs/deployments/preview-deployments" target="_blank" rel="noopener">Preview Deployments na Vercel</a>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Fluxo de Pull Request</span>
+          <span class="lang">flow</span>
+        </div>
+        <pre><code>develop → main</code></pre>
+      </div>
+    </section>
+
+    <section id="producao">
+      <div class="eyebrow">Etapas 11 e 12</div>
+      <h2>Produção e pós-deploy</h2>
+      <p class="section-sub">A produção só entra depois da validação em homologação e do merge controlado para a branch principal.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Merge na main e banco em produção</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git checkout main
+git merge develop
+git push origin main
+
+npx supabase link --project-ref PROJECT_REF_PROD
+npx supabase db push</code></pre>
+      </div>
+
+      <div class="callout warn">
+        O template recomenda aplicar as migrations em produção sempre após o deploy.
+      </div>
+
+      <ul class="checklist">
+        <li><span class="check"></span><span>Testar login</span></li>
+        <li><span class="check"></span><span>Criar item</span></li>
+        <li><span class="check"></span><span>Editar item</span></li>
+        <li><span class="check"></span><span>Excluir item</span></li>
+        <li><span class="check"></span><span>Logout</span></li>
+      </ul>
+    </section>
+
+    <section id="rollback">
+      <div class="eyebrow">Etapas 13 e 14</div>
+      <h2>Rollback e monitoramento opcional</h2>
+      <p class="section-sub">O template também cobre resposta a incidentes e monitoração contínua com Uptime Kuma.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Rollback</h3>
+          <ul>
+            <li>Frontend: rollback pela <a href="https://vercel.com/docs/deployments/rollback-a-deployment" target="_blank" rel="noopener">Vercel</a></li>
+            <li>Banco: correção por nova migration</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Monitoração</h3>
+          <ul>
+            <li>Monitorar frontend em produção</li>
+            <li>Monitorar endpoint do Supabase</li>
+            <li>Receber alertas por Telegram, Slack, E-mail ou Discord</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Subir Uptime Kuma via Docker</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>docker run -d --restart=always -p 3001:3001 \
+  -v uptime-kuma:/app/data \
+  --name uptime-kuma \
+  louislam/uptime-kuma:1</code></pre>
+      </div>
+
+      <div class="inline-links">
+        <a href="https://github.com/louislam/uptime-kuma" target="_blank" rel="noopener">GitHub do Uptime Kuma</a>
+        <a href="https://github.com/louislam/uptime-kuma/wiki" target="_blank" rel="noopener">Wiki do Uptime Kuma</a>
+      </div>
+    </section>
+
+    <section id="regras">
+      <div class="eyebrow">Regras fixas</div>
+      <h2>Os princípios que não podem ser quebrados</h2>
+      <p class="section-sub">Essas regras aparecem diretamente no template como pilares do processo.</p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Nunca</h3>
+          <ul>
+            <li>Desenvolver direto na <strong>main</strong></li>
+            <li>Usar Supabase PROD no Antigravity</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Sempre</h3>
+          <ul>
+            <li>MCP sempre em <strong>HML</strong></li>
+            <li>Produção como consequência do processo</li>
+          </ul>
+        </article>
+      </div>
+
+      <blockquote>
+        Produção não é o lugar para experimentar. O lugar certo para errar barato é o fluxo de ideação, desenvolvimento e homologação.
+      </blockquote>
+    </section>
+
+    <section id="checklist">
+      <div class="eyebrow">Checklist final</div>
+      <h2>Quando considerar o projeto realmente pronto</h2>
+      <p class="section-sub">O fechamento só acontece quando ambiente, processo, banco e publicação foram todos validados.</p>
+
+      <ul class="checklist">
+        <li><span class="check"></span><span>Windows preparado e ferramentas verificadas</span></li>
+        <li><span class="check"></span><span>Contas do projeto e e-mail dedicado configurados</span></li>
+        <li><span class="check"></span><span>Supabase HML e PROD criados separadamente</span></li>
+        <li><span class="check"></span><span>Especificação do WebApp criada antes do código</span></li>
+        <li><span class="check"></span><span>Protótipo visual validado</span></li>
+        <li><span class="check"></span><span>Repositório com <strong>main</strong> e <strong>develop</strong></span></li>
+        <li><span class="check"></span><span>Supabase CLI configurado por projeto</span></li>
+        <li><span class="check"></span><span>Migrations versionadas e aplicadas corretamente</span></li>
+        <li><span class="check"></span><span>Homologação validada por preview e PR</span></li>
+        <li><span class="check"></span><span>Produção publicada e fluxo pós-deploy testado</span></li>
+      </ul>
+
+      <div class="callout ok">
+        Quando todos esses pontos estiverem fechados, o template virou uma operação real de CI/CD para WebApps.
+      </div>
+    </section>
+  </main>
+  <script>
+    const codeBlocks = document.querySelectorAll('.code-block');
+
+    codeBlocks.forEach((block) => {
+      const header = block.querySelector('.code-head');
+      const code = block.querySelector('pre code');
+
+      if (!header || !code) {
+        return;
+      }
+
+      const button = document.createElement('button');
+      button.className = 'copy-btn';
+      button.type = 'button';
+      button.title = 'Copiar codigo';
+      button.setAttribute('aria-label', 'Copiar codigo');
+
+      const copyIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z"></path>
+        </svg>
+      `;
+      const checkIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+        </svg>
+      `;
+
+      button.innerHTML = copyIcon;
+
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(code.textContent);
+          button.innerHTML = checkIcon;
+          button.classList.add('copied');
+
+          window.setTimeout(() => {
+            button.innerHTML = copyIcon;
+            button.classList.remove('copied');
+          }, 1800);
+        } catch (error) {
+          button.title = 'Falha ao copiar';
+          button.setAttribute('aria-label', 'Falha ao copiar');
+
+          window.setTimeout(() => {
+            button.title = 'Copiar codigo';
+            button.setAttribute('aria-label', 'Copiar codigo');
+          }, 1800);
+        }
+      });
+
+      header.appendChild(button);
+    });
+
+    const ideacaoSection = document.getElementById('ideacao');
+    const prototipacaoSection = document.getElementById('prototipacao');
+    const antigravitySection = document.getElementById('antigravity');
+    const versionamentoSection = document.getElementById('versionamento');
+
+    if (ideacaoSection && prototipacaoSection) {
+      ideacaoSection.parentNode.insertBefore(prototipacaoSection, ideacaoSection);
+    }
+
+    if (antigravitySection && versionamentoSection) {
+      versionamentoSection.parentNode.insertBefore(antigravitySection, versionamentoSection);
+    }
+
+    const checklistStorageKey = 'template-aula-checklist-state-v2';
+    let storedChecklistState = {};
+
+    try {
+      storedChecklistState = JSON.parse(localStorage.getItem(checklistStorageKey) || '{}');
+    } catch (error) {
+      storedChecklistState = {};
+    }
+    const checklistItems = document.querySelectorAll('main section ul li, main section ol li');
+
+    const getChecklistItemKey = (item, index) => {
+      const section = item.closest('section');
+      const sectionId = section ? section.id : 'global';
+      const label = item.textContent.replace(/\s+/g, ' ').trim();
+      return `${sectionId}:${index}:${label}`;
+    };
+
+    const persistChecklistState = () => {
+      try {
+        localStorage.setItem(checklistStorageKey, JSON.stringify(storedChecklistState));
+      } catch (error) {
+        // Ignore storage failures so the checklist still works in memory.
+      }
+    };
+
+    const syncChecklistItem = (item, checked) => {
+      const icon = item.querySelector('.task-toggle, .check');
+      item.classList.toggle('checked', checked);
+
+      if (icon) {
+        icon.textContent = checked ? '✓' : '';
+      }
+    };
+
+    checklistItems.forEach((item, index) => {
+      if (item.closest('.toc')) {
+        return;
+      }
+
+      if (item.classList.contains('no-task')) {
+        return;
+      }
+
+      if (!item.querySelector('.task-toggle')) {
+        const originalHtml = item.innerHTML;
+        item.innerHTML = `<span class="task-toggle" aria-hidden="true"></span><span class="task-label">${originalHtml}</span>`;
+      }
+
+      item.classList.add('task-item');
+      const key = getChecklistItemKey(item, index);
+      const initialChecked = Boolean(storedChecklistState[key]);
+
+      item.setAttribute('role', 'checkbox');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-checked', String(initialChecked));
+      item.setAttribute('title', 'Clique para marcar ou desmarcar');
+      syncChecklistItem(item, initialChecked);
+
+      const toggleItem = () => {
+        const nextValue = !item.classList.contains('checked');
+        storedChecklistState[key] = nextValue;
+        item.setAttribute('aria-checked', String(nextValue));
+        syncChecklistItem(item, nextValue);
+        persistChecklistState();
+      };
+
+      item.addEventListener('click', toggleItem);
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleItem();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
