@@ -4,567 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guia CI/CD para WebApps</title>
-  <style>
-    :root {
-      --accent: #00ffa7;
-      --accent-soft: #9ff5c8;
-      --accent-faint: rgba(0, 255, 167, 0.08);
-      --bg: #050812;
-      --bg-top: #0d1a2e;
-      --surface: #0b1225;
-      --surface-2: #111a30;
-      --border: rgba(255, 255, 255, 0.1);
-      --text: #dde9f5;
-      --muted: #7a9bb5;
-      --info: #4da6ff;
-      --warn: #ffb84d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: #3f3f46 transparent;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      font-size: 19px;
-      line-height: 1.7;
-    }
-
-    a {
-      color: var(--accent-soft);
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    header {
-      padding: 72px 24px 56px;
-      text-align: center;
-      background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg) 62%);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .badge {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 255, 167, 0.35);
-      background: rgba(0, 255, 167, 0.1);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(30px, 5vw, 52px);
-      line-height: 1.08;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    h1 span {
-      color: var(--accent);
-    }
-
-    .hero-copy {
-      max-width: 760px;
-      margin: 0 auto 28px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .hero-stamp {
-      display: block;
-      width: min(220px, 42vw);
-      height: auto;
-      margin: 0 auto 22px;
-      filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.28));
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px 28px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .meta strong {
-      color: var(--accent-soft);
-    }
-
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 56px 24px 100px;
-    }
-
-    .toc,
-    .card,
-    .code-block,
-    .timeline-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-
-    .toc {
-      padding: 24px 26px;
-      margin-bottom: 52px;
-    }
-
-    .eyebrow,
-    .toc h2,
-    .card h3 {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .toc h2 {
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .toc ol {
-      padding-left: 20px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px 22px;
-    }
-
-    section {
-      margin-bottom: 72px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    section h2 {
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.18;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-
-    .section-sub {
-      margin-bottom: 24px;
-      color: var(--muted);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 18px;
-    }
-
-    p, ul, ol {
-      margin-bottom: 18px;
-    }
-
-    ul, ol {
-      padding-left: 22px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    strong {
-      color: #fff;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 24px 0;
-    }
-
-    .card {
-      padding: 20px;
-    }
-
-    .card h3 {
-      color: var(--accent-soft);
-      margin-bottom: 12px;
-    }
-
-    .callout {
-      padding: 16px 18px;
-      border-left: 3px solid;
-      border-radius: 12px;
-      margin: 20px 0;
-    }
-
-    .callout.info {
-      background: rgba(77, 166, 255, 0.08);
-      border-color: var(--info);
-      color: #abd6ff;
-    }
-
-    .callout.warn {
-      background: rgba(255, 184, 77, 0.08);
-      border-color: var(--warn);
-      color: #ffd8a5;
-    }
-
-    .callout.ok {
-      background: var(--accent-faint);
-      border-color: var(--accent);
-      color: var(--accent-soft);
-    }
-
-    .code-block {
-      overflow: hidden;
-      margin: 22px 0;
-    }
-
-    .code-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      background: var(--surface-2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 13px;
-      color: #8ab4d8;
-    }
-
-    .dots {
-      display: flex;
-      gap: 5px;
-    }
-
-    .dots i {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      display: block;
-    }
-
-    .dots i:nth-child(1) { background: #ff5f56; }
-    .dots i:nth-child(2) { background: #ffbd2e; }
-    .dots i:nth-child(3) { background: #27c93f; }
-
-    .lang {
-      margin-left: auto;
-      color: var(--accent);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .copy-btn {
-      margin-left: 10px;
-      width: 34px;
-      height: 34px;
-      padding: 0;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--accent-soft);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .copy-btn:hover {
-      background: rgba(0, 255, 167, 0.1);
-      border-color: rgba(0, 255, 167, 0.35);
-      color: var(--accent);
-    }
-
-    .copy-btn.copied {
-      background: rgba(0, 255, 167, 0.14);
-      border-color: rgba(0, 255, 167, 0.45);
-      color: var(--accent);
-    }
-
-    .copy-btn svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    pre {
-      overflow-x: auto;
-      padding: 18px;
-      background: var(--surface);
-    }
-
-    code {
-      font-family: "JetBrains Mono", "Fira Code", monospace;
-      font-size: 0.92em;
-      color: #c9d8ee;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 16px;
-    }
-
-    .timeline-item {
-      padding: 20px;
-    }
-
-    .timeline-item h3 {
-      color: #fff;
-      margin-bottom: 8px;
-      font-size: 20px;
-    }
-
-    .steps {
-      list-style: none;
-      padding-left: 0;
-      counter-reset: step;
-      margin: 24px 0;
-    }
-
-    .steps li {
-      counter-increment: step;
-      display: flex;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .steps li:last-child {
-      border-bottom: 0;
-    }
-
-    .steps li::before {
-      content: counter(step);
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      flex: 0 0 28px;
-      display: grid;
-      place-items: center;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .inline-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      margin: 14px 0 0;
-      font-size: 16px;
-    }
-
-    .soft-box {
-      padding: 18px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      margin: 18px 0;
-    }
-
-    .plain-list {
-      list-style: disc;
-      padding-left: 22px;
-      margin: 14px 0 18px;
-    }
-
-    .plain-list li {
-      display: list-item;
-      padding: 0;
-      margin-bottom: 8px;
-      border-bottom: 0;
-      cursor: default;
-    }
-
-    .plain-list li:hover {
-      background: transparent;
-    }
-
-    .checklist {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .checklist li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .checklist li:last-child {
-      border-bottom: 0;
-    }
-
-    .checklist li:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .checklist li.checked {
-      color: var(--accent-soft);
-    }
-
-    .checklist li.checked span:last-child {
-      text-decoration: line-through;
-      text-decoration-color: rgba(0, 255, 167, 0.45);
-    }
-
-    .check {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 18px;
-      margin-top: 5px;
-      border-radius: 999px;
-      background: rgba(0, 255, 167, 0.15);
-      border: 1px solid rgba(0, 255, 167, 0.4);
-      display: grid;
-      place-items: center;
-      color: var(--accent);
-      font-size: 11px;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .checklist li.checked .check {
-      background: rgba(0, 255, 167, 0.22);
-      border-color: rgba(0, 255, 167, 0.8);
-      transform: scale(1.05);
-    }
-
-    .checklist-inline {
-      margin: 10px 0 0;
-      padding-left: 0;
-    }
-
-    .checklist-inline li {
-      list-style: none;
-      padding: 0;
-      border-bottom: 0;
-      cursor: default;
-      align-items: flex-start;
-    }
-
-    .checklist-inline li:hover {
-      background: transparent;
-    }
-
-    .checklist-inline .task-toggle {
-      margin-top: 4px;
-    }
-
-    .task-item {
-      list-style: none;
-      padding-left: 0;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 8px 10px;
-      margin-left: -10px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .task-item:hover {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .task-item.checked {
-      color: var(--accent-soft);
-    }
-
-    .task-item.checked .task-label {
-      text-decoration: line-through;
-      text-decoration-color: rgba(0, 255, 167, 0.45);
-    }
-
-    .task-toggle {
-      width: 22px;
-      height: 22px;
-      flex: 0 0 22px;
-      margin-top: 3px;
-      border-radius: 6px;
-      border: 1px solid rgba(0, 255, 167, 0.35);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .task-item.checked .task-toggle {
-      background: rgba(0, 255, 167, 0.18);
-      border-color: rgba(0, 255, 167, 0.8);
-      transform: scale(1.04);
-    }
-
-    .task-label {
-      flex: 1;
-      min-width: 0;
-    }
-
-    hr {
-      border: 0;
-      border-top: 1px solid var(--border);
-      margin: 44px 0;
-    }
-
-    blockquote {
-      margin-top: 24px;
-      padding: 20px 22px;
-      border-left: 3px solid var(--accent);
-      border-radius: 0 10px 10px 0;
-      background: var(--accent-faint);
-      color: #c8ffe1;
-      font-style: italic;
-    }
-
-    @media (max-width: 720px) {
-      body {
-        font-size: 17px;
-      }
-
-      .toc ol,
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        padding-inline: 18px;
-      }
-
-      .container {
-        padding-inline: 18px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <header>
@@ -583,7 +23,7 @@
   </header>
 
   <main class="container">
-    <nav class="toc">
+    <nav class="toc" aria-label="Navegacao da pagina">
       <h2>Nesta página</h2>
       <ol>
         <li><a href="#visao-geral">Visão geral</a></li>
@@ -743,6 +183,23 @@ docker --version</code></pre>
       </div>
     </section>
 
+    <section id="prototipacao">
+      <div class="eyebrow">Etapa 3</div>
+      <h2>Prototipação visual e design system</h2>
+      <p class="section-sub">O template manda buscar inspiração, extrair padrões visuais e validar UX antes do backend.</p>
+
+      <ol class="steps">
+        <li>Usar o <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a> para buscar referências visuais</li>
+        <li>Identificar paleta, tipografia, espaçamento e componentes</li>
+        <li>Criar o protótipo no <a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a>(Opcional)</li>
+        <li>Validar fluxo das telas sem backend e sem deploy</li>
+      </ol>
+
+      <div class="callout ok">
+        Primeiro a UX, depois o código. Essa ordem reduz retrabalho.
+      </div>
+    </section>
+
     <section id="ideacao">
       <div class="eyebrow">Etapa 4</div>
       <h2>Ideação com IA sem escrever código</h2>
@@ -788,8 +245,8 @@ Crie um PRD.md com todo o prompt</code></pre>
 
       <article class="card">
         <h3>Proximo passo no Windows Explorer</h3>
-        <ul class="checklist checklist-inline">
-          <li><span class="task-toggle"></span><span>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</span></li>
+        <ul class="checklist checklist-inline" data-checklist>
+          <li><span class="task-toggle" aria-hidden="true"></span><span>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</span></li>
         </ul>
       </article>
     </section>
@@ -840,62 +297,6 @@ Crie um PRD.md com todo o prompt</code></pre>
           </ul>
         </article>
       </div>
-
-    </section>
-
-    <section id="prototipacao">
-      <div class="eyebrow">Etapa 3</div>
-      <h2>Prototipação visual e design system</h2>
-      <p class="section-sub">O template manda buscar inspiração, extrair padrões visuais e validar UX antes do backend.</p>
-
-      <div class="steps">
-        <li>Usar o <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a> para buscar referências visuais</li>
-        <li>Identificar paleta, tipografia, espaçamento e componentes</li>
-        <li>Criar o protótipo no <a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a>(Opcional)</li>
-        <li>Validar fluxo das telas sem backend e sem deploy</li>
-      </div>
-
-      <div class="callout ok">
-        Primeiro a UX, depois o código. Essa ordem reduz retrabalho.
-      </div>
-    </section>
-
-    <section id="versionamento">
-      <div class="eyebrow">Etapa 6</div>
-      <h2>Código base e versionamento correto</h2>
-      <p class="section-sub">Com o escopo e o visual definidos, o projeto entra em Git com uma estrutura de branches profissional.</p>
-
-      <div class="code-block">
-        <div class="code-head">
-          <span class="dots"><i></i><i></i><i></i></span>
-          <span>Inicialização do repositório</span>
-          <span class="lang">bash</span>
-        </div>
-        <pre><code>git init
-git branch -M main
-git remote add origin https://github.com/USER/REPO.git
-git add .
-git commit -m "chore: initial project structure"
-git push -u origin main</code></pre>
-      </div>
-
-      <div class="code-block">
-        <div class="code-head">
-          <span class="dots"><i></i><i></i><i></i></span>
-          <span>Branch de homologação e identificação</span>
-          <span class="lang">bash</span>
-        </div>
-        <pre><code>git checkout -b develop
-git push -u origin develop
-
-git config user.name "Seu Nome"
-git config user.email "seu-email-da-conta-atual@exemplo.com"</code></pre>
-      </div>
-
-      <ul>
-        <li><strong>main</strong> representa produção</li>
-        <li><strong>develop</strong> representa homologação</li>
-      </ul>
     </section>
 
     <section id="antigravity">
@@ -935,6 +336,44 @@ git config user.email "seu-email-da-conta-atual@exemplo.com"</code></pre>
         <a href="https://supabase.com/docs/guides/ai/mcp" target="_blank" rel="noopener">MCP Supabase</a>
         <a href="https://supabase.com/docs/guides/auth" target="_blank" rel="noopener">Supabase Auth</a>
       </div>
+    </section>
+
+    <section id="versionamento">
+      <div class="eyebrow">Etapa 6</div>
+      <h2>Código base e versionamento correto</h2>
+      <p class="section-sub">Com o escopo e o visual definidos, o projeto entra em Git com uma estrutura de branches profissional.</p>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Inicialização do repositório</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git init
+git branch -M main
+git remote add origin https://github.com/USER/REPO.git
+git add .
+git commit -m "chore: initial project structure"
+git push -u origin main</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span>Branch de homologação e identificação</span>
+          <span class="lang">bash</span>
+        </div>
+        <pre><code>git checkout -b develop
+git push -u origin develop
+
+git config user.name "Seu Nome"
+git config user.email "seu-email-da-conta-atual@exemplo.com"</code></pre>
+      </div>
+
+      <ul>
+        <li><strong>main</strong> representa produção</li>
+        <li><strong>develop</strong> representa homologação</li>
+      </ul>
     </section>
 
     <section id="supabase-cli">
@@ -1129,7 +568,7 @@ npx supabase db push</code></pre>
         O template recomenda aplicar as migrations em produção sempre após o deploy.
       </div>
 
-      <ul class="checklist">
+      <ul class="checklist" data-checklist>
         <li><span class="check"></span><span>Testar login</span></li>
         <li><span class="check"></span><span>Criar item</span></li>
         <li><span class="check"></span><span>Editar item</span></li>
@@ -1211,7 +650,7 @@ npx supabase db push</code></pre>
       <h2>Quando considerar o projeto realmente pronto</h2>
       <p class="section-sub">O fechamento só acontece quando ambiente, processo, banco e publicação foram todos validados.</p>
 
-      <ul class="checklist">
+      <ul class="checklist" data-checklist>
         <li><span class="check"></span><span>Windows preparado e ferramentas verificadas</span></li>
         <li><span class="check"></span><span>Contas do projeto e e-mail dedicado configurados</span></li>
         <li><span class="check"></span><span>Supabase HML e PROD criados separadamente</span></li>
@@ -1229,151 +668,6 @@ npx supabase db push</code></pre>
       </div>
     </section>
   </main>
-  <script>
-    const codeBlocks = document.querySelectorAll('.code-block');
-
-    codeBlocks.forEach((block) => {
-      const header = block.querySelector('.code-head');
-      const code = block.querySelector('pre code');
-
-      if (!header || !code) {
-        return;
-      }
-
-      const button = document.createElement('button');
-      button.className = 'copy-btn';
-      button.type = 'button';
-      button.title = 'Copiar codigo';
-      button.setAttribute('aria-label', 'Copiar codigo');
-
-      const copyIcon = `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z"></path>
-        </svg>
-      `;
-      const checkIcon = `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-        </svg>
-      `;
-
-      button.innerHTML = copyIcon;
-
-      button.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(code.textContent);
-          button.innerHTML = checkIcon;
-          button.classList.add('copied');
-
-          window.setTimeout(() => {
-            button.innerHTML = copyIcon;
-            button.classList.remove('copied');
-          }, 1800);
-        } catch (error) {
-          button.title = 'Falha ao copiar';
-          button.setAttribute('aria-label', 'Falha ao copiar');
-
-          window.setTimeout(() => {
-            button.title = 'Copiar codigo';
-            button.setAttribute('aria-label', 'Copiar codigo');
-          }, 1800);
-        }
-      });
-
-      header.appendChild(button);
-    });
-
-    const ideacaoSection = document.getElementById('ideacao');
-    const prototipacaoSection = document.getElementById('prototipacao');
-    const antigravitySection = document.getElementById('antigravity');
-    const versionamentoSection = document.getElementById('versionamento');
-
-    if (ideacaoSection && prototipacaoSection) {
-      ideacaoSection.parentNode.insertBefore(prototipacaoSection, ideacaoSection);
-    }
-
-    if (antigravitySection && versionamentoSection) {
-      versionamentoSection.parentNode.insertBefore(antigravitySection, versionamentoSection);
-    }
-
-    const checklistStorageKey = 'template-aula-checklist-state-v2';
-    let storedChecklistState = {};
-
-    try {
-      storedChecklistState = JSON.parse(localStorage.getItem(checklistStorageKey) || '{}');
-    } catch (error) {
-      storedChecklistState = {};
-    }
-    const checklistItems = document.querySelectorAll('main section ul li, main section ol li');
-
-    const getChecklistItemKey = (item, index) => {
-      const section = item.closest('section');
-      const sectionId = section ? section.id : 'global';
-      const label = item.textContent.replace(/\s+/g, ' ').trim();
-      return `${sectionId}:${index}:${label}`;
-    };
-
-    const persistChecklistState = () => {
-      try {
-        localStorage.setItem(checklistStorageKey, JSON.stringify(storedChecklistState));
-      } catch (error) {
-        // Ignore storage failures so the checklist still works in memory.
-      }
-    };
-
-    const syncChecklistItem = (item, checked) => {
-      const icon = item.querySelector('.task-toggle, .check');
-      item.classList.toggle('checked', checked);
-
-      if (icon) {
-        icon.textContent = checked ? '✓' : '';
-      }
-    };
-
-    checklistItems.forEach((item, index) => {
-      if (item.closest('.toc')) {
-        return;
-      }
-
-      if (item.closest('.plain-list')) {
-        return;
-      }
-
-      if (item.classList.contains('no-task')) {
-        return;
-      }
-
-      if (!item.querySelector('.task-toggle')) {
-        const originalHtml = item.innerHTML;
-        item.innerHTML = `<span class="task-toggle" aria-hidden="true"></span><span class="task-label">${originalHtml}</span>`;
-      }
-
-      item.classList.add('task-item');
-      const key = getChecklistItemKey(item, index);
-      const initialChecked = Boolean(storedChecklistState[key]);
-
-      item.setAttribute('role', 'checkbox');
-      item.setAttribute('tabindex', '0');
-      item.setAttribute('aria-checked', String(initialChecked));
-      item.setAttribute('title', 'Clique para marcar ou desmarcar');
-      syncChecklistItem(item, initialChecked);
-
-      const toggleItem = () => {
-        const nextValue = !item.classList.contains('checked');
-        storedChecklistState[key] = nextValue;
-        item.setAttribute('aria-checked', String(nextValue));
-        syncChecklistItem(item, nextValue);
-        persistChecklistState();
-      };
-
-      item.addEventListener('click', toggleItem);
-      item.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          toggleItem();
-        }
-      });
-    });
-  </script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
