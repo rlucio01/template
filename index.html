@@ -93,24 +93,74 @@
           <ul>
             <li>Instalar um navegador moderno</li>
           </ul>
-          <div class="inline-links">
-            <a href="https://www.google.com/chrome" target="_blank" rel="noopener">Chrome</a>
-            <a href="https://www.microsoft.com/edge" target="_blank" rel="noopener">Edge</a>
-            <a href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener">Firefox</a>
-            <a href="https://www.opera.com/download" target="_blank" rel="noopener">Opera</a>
+          <div class="browser-grid" aria-label="Opcoes de navegadores">
+            <a class="browser-link chrome" href="https://www.google.com/chrome" target="_blank" rel="noopener" aria-label="Baixar Google Chrome">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/chrome.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Chrome</span>
+            </a>
+            <a class="browser-link edge" href="https://www.microsoft.com/edge" target="_blank" rel="noopener" aria-label="Baixar Microsoft Edge">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/edge.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Edge</span>
+            </a>
+            <a class="browser-link firefox" href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener" aria-label="Baixar Mozilla Firefox">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/firefox.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Firefox</span>
+            </a>
+            <a class="browser-link opera" href="https://www.opera.com/download" target="_blank" rel="noopener" aria-label="Baixar Opera">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/opera.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Opera</span>
+            </a>
           </div>
         </article>
         <article class="timeline-item">
           <h3>Criar contas do projeto</h3>
           <p>Crie uma conta de serviço no <a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a> para o projeto. Essa conta deve ser usada no <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>. Os demais serviços podem usar contas particulares, se fizer sentido na sua operação.</p>
-          <ul>
-            <li><a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a></li>
-            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a></li>
-            <li><a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a></li>
-            <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></li>
-            <li><a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a></li>
-          </ul>
+          <div class="browser-grid app-grid" aria-label="Aplicativos e plataformas do projeto">
+            <a class="browser-link app-link protonmail" href="https://proton.me/mail" target="_blank" rel="noopener" aria-label="Abrir Proton Mail">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/protonmail.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Proton Mail</span>
+            </a>
+            <a class="browser-link app-link github" href="https://github.com" target="_blank" rel="noopener" aria-label="Abrir GitHub">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/github.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">GitHub</span>
+            </a>
+            <a class="browser-link app-link supabase" href="https://supabase.com" target="_blank" rel="noopener" aria-label="Abrir Supabase">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/supabase.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Supabase</span>
+            </a>
+            <a class="browser-link app-link vercel" href="https://vercel.com" target="_blank" rel="noopener" aria-label="Abrir Vercel">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/vercel.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Vercel</span>
+            </a>
+            <a class="browser-link app-link claude" href="https://claude.ai" target="_blank" rel="noopener" aria-label="Abrir Claude">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/claude.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Claude</span>
+            </a>
+            <a class="browser-link app-link googleaistudio" href="https://aistudio.google.com" target="_blank" rel="noopener" aria-label="Abrir Google AI Studio">
+              <span class="browser-logo" aria-hidden="true">
+                <img src="assets/icons/googleaistudio.svg" alt="" loading="lazy">
+              </span>
+              <span class="browser-name">Google AI Studio</span>
+            </a>
+          </div>
         </article>
       </div>
 
