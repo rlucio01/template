@@ -384,6 +384,24 @@
       margin: 18px 0;
     }
 
+    .plain-list {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 14px 0 18px;
+    }
+
+    .plain-list li {
+      display: list-item;
+      padding: 0;
+      margin-bottom: 8px;
+      border-bottom: 0;
+      cursor: default;
+    }
+
+    .plain-list li:hover {
+      background: transparent;
+    }
+
     .checklist {
       list-style: none;
       padding-left: 0;
@@ -435,6 +453,27 @@
       background: rgba(0, 255, 167, 0.22);
       border-color: rgba(0, 255, 167, 0.8);
       transform: scale(1.05);
+    }
+
+    .checklist-inline {
+      margin: 10px 0 0;
+      padding-left: 0;
+    }
+
+    .checklist-inline li {
+      list-style: none;
+      padding: 0;
+      border-bottom: 0;
+      cursor: default;
+      align-items: flex-start;
+    }
+
+    .checklist-inline li:hover {
+      background: transparent;
+    }
+
+    .checklist-inline .task-toggle {
+      margin-top: 4px;
     }
 
     .task-item {
@@ -711,6 +750,13 @@ docker --version</code></pre>
 
       <p>Ferramenta sugerida: <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
 
+      <div class="callout info">
+        Dica: se quiser comparar qual IA faz mais sentido para o momento, consulte o
+        <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener">LM Arena Leaderboard</a>
+        e o
+        <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">Artificial Analysis</a>.
+      </div>
+
       <div class="code-block">
         <div class="code-head">
           <span class="dots"><i></i><i></i><i></i></span>
@@ -735,12 +781,16 @@ Crie um PRD.md com todo o prompt</code></pre>
       <div class="callout warn">
         Bonus opcional: se quiser acelerar a escrita por voz durante essa etapa, instale o
         <a href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>
+        ou
+        <a href="https://handy.computer" target="_blank" rel="noopener">Handy</a>
         para transcricao de voz.
       </div>
 
       <article class="card">
         <h3>Proximo passo no Windows Explorer</h3>
-        <p>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</p>
+        <ul class="checklist checklist-inline">
+          <li><span class="task-toggle"></span><span>Agora crie uma pasta com o nome do projeto no Windows Explorer e salvar dentro dela o arquivo <code>PRD.md</code> criado nesta etapa.</span></li>
+        </ul>
       </article>
     </section>
 
@@ -868,6 +918,17 @@ git config user.email "seu-email-da-conta-atual@exemplo.com"</code></pre>
             <li>Alinhar MCP Global para o mesmo ambiente</li>
           </ul>
         </article>
+      </div>
+
+      <div class="callout warn">
+        <strong>Atenção ao Supabase Free:</strong> se o MCP estiver apontando para um projeto no plano gratuito, considere estas limitações oficiais do Supabase:
+        <ul class="plain-list">
+          <li><strong>Banco de dados:</strong> até 500 MB por projeto</li>
+          <li><strong>Auth:</strong> até 50.000 usuários ativos por mês (MAU) no Supabase Auth</li>
+          <li><strong>Storage:</strong> até 1 GB</li>
+          <li><strong>Inatividade:</strong> projetos Free com atividade extremamente baixa em um período de 7 dias podem ser pausados automaticamente</li>
+        </ul>
+        Se o projeto de homologação entrar em pausa, o MCP pode deixar de responder até a reativação manual no dashboard.
       </div>
 
       <div class="inline-links">
@@ -1271,6 +1332,10 @@ npx supabase db push</code></pre>
 
     checklistItems.forEach((item, index) => {
       if (item.closest('.toc')) {
+        return;
+      }
+
+      if (item.closest('.plain-list')) {
         return;
       }
 
