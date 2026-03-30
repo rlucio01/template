@@ -354,9 +354,16 @@ code {
 .steps li {
   counter-increment: step;
   display: flex;
+  align-items: flex-start;
   gap: 14px;
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.step-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .steps li:last-child {
@@ -389,6 +396,7 @@ code {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
   padding: 14px 16px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -469,9 +477,14 @@ code {
 }
 
 .browser-name {
+  min-width: 0;
+  flex: 1;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: 0.01em;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .soft-box {
@@ -545,4 +558,5 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+
 
