@@ -209,6 +209,33 @@ strong {
   margin-bottom: 12px;
 }
 
+.explorer-example {
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 224, 122, 0.12), transparent 55%),
+    var(--surface-2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.explorer-example img {
+  width: 96px;
+  height: auto;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.explorer-example figcaption {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .callout {
   padding: 16px 18px;
   border-left: 3px solid;
@@ -558,5 +585,6 @@ blockquote {
     grid-template-columns: 1fr;
   }
 }
+
 
 
