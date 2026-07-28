@@ -25,6 +25,10 @@ html {
   scrollbar-color: #3f3f46 transparent;
 }
 
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -152,6 +156,8 @@ h1 span {
 
 section {
   margin-bottom: 72px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }
 
 .eyebrow {
@@ -336,6 +342,11 @@ strong {
   background: rgba(0, 255, 167, 0.14);
   border-color: rgba(0, 255, 167, 0.45);
   color: var(--accent);
+}
+
+.copy-btn:disabled {
+  cursor: wait;
+  opacity: 0.75;
 }
 
 .copy-btn svg {
@@ -583,6 +594,21 @@ blockquote {
 @media (max-width: 520px) {
   .browser-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 

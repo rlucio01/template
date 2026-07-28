@@ -20,6 +20,8 @@ function setCopyButtonIdleState(button) {
 function setCopyButtonSuccessState(button) {
   button.innerHTML = CHECK_ICON;
   button.classList.add("copied");
+  button.title = "Codigo copiado";
+  button.setAttribute("aria-label", "Codigo copiado");
 }
 
 async function copyText(text) {
@@ -43,21 +45,26 @@ function createCopyButton(codeElement) {
   const button = document.createElement("button");
   button.className = "copy-btn";
   button.type = "button";
+  let resetTimer;
   setCopyButtonIdleState(button);
 
   button.addEventListener("click", async () => {
+    if (button.disabled) {
+      return;
+    }
+
+    button.disabled = true;
+    window.clearTimeout(resetTimer);
+
     try {
       await copyText(codeElement.textContent.trimEnd());
       setCopyButtonSuccessState(button);
-
-      window.setTimeout(() => {
-        setCopyButtonIdleState(button);
-      }, 1800);
     } catch (error) {
       button.title = "Falha ao copiar";
       button.setAttribute("aria-label", "Falha ao copiar");
-
-      window.setTimeout(() => {
+    } finally {
+      button.disabled = false;
+      resetTimer = window.setTimeout(() => {
         setCopyButtonIdleState(button);
       }, 1800);
     }

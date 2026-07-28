@@ -4,13 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guia visual de CI/CD para planejar, versionar, homologar e publicar WebApps.">
+  <meta name="theme-color" content="#050812">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050812'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%2300ffa7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <title>Guia CI/CD para WebApps</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
   <header>
-    <img class="hero-stamp" src="Selo aprovado com caricatura alegre.png" alt="Selo aprovado com caricatura alegre">
+    <picture>
+      <source srcset="assets/selo-aprovado.webp" type="image/webp">
+      <img class="hero-stamp" src="Selo aprovado com caricatura alegre.png" alt="Selo aprovado com caricatura alegre"
+        width="220" height="220" fetchpriority="high">
+    </picture>
     <div class="badge">Template · CI/CD para WebApps</div>
     <h1>Do Zero ao <span>Deploy em Produção</span></h1>
     <p class="hero-copy">
@@ -191,7 +198,7 @@
             <li><a href="https://cli.github.com/" target="_blank" rel="noopener"><strong>GitHub CLI</strong></a> para
               autenticação e ações no GitHub via terminal</li>
             <li><a href="https://nodejs.org/" target="_blank" rel="noopener"><strong>Node.js LTS</strong></a>, não a
-              versão Current</li>
+              versão Current (na instalação, não marque a opção do Chocolatey)</li>
             <li><a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701" target="_blank"
                 rel="noopener"><strong>Windows Terminal</strong></a> recomendado</li>
           </ul>
@@ -199,7 +206,7 @@
         <article class="card">
           <h3>Ferramentas de trabalho</h3>
           <ul>
-            <li><a href="https://antigravity.google/" target="_blank" rel="noopener"><strong>Antigravity</strong></a>
+            <li><a href="https://antigravity.google/" target="_blank" rel="noopener"><strong>Antigravity IDE</strong></a>
               como ambiente principal</li>
             <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener"><strong>Docker
                   Desktop</strong></a> com WSL 2</li>
@@ -268,9 +275,9 @@ docker --version</code></pre>
       </p>
 
       <ol class="steps">
-        <li><span class="step-text">Usar o <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a> e
-            o <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a> para buscar referências
-            visuais</span></li>
+        <li><span class="step-text">Usar o <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>,
+            Pinterest, Awwwards e o <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a> para buscar
+            referências visuais</span></li>
         <li><span class="step-text">Identificar paleta, tipografia, espaçamento e componentes</span></li>
         <li><span class="step-text">Criar o protótipo no <a href="https://aistudio.google.com" target="_blank"
               rel="noopener">Google AI Studio</a> (Opcional)</span></li>
@@ -320,8 +327,8 @@ Crie um PRD.md com todo o prompt</code></pre>
       </div>
       <div class="callout warn">
         Bonus opcional: se quiser acelerar a escrita por voz durante essa etapa, instale o
-        <a href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>
-        ou
+        <a href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>,
+        <a href="https://amical.ai" target="_blank" rel="noopener">Amical</a> ou
         <a href="https://handy.computer" target="_blank" rel="noopener">Handy</a>
         para transcricao de voz.
       </div>
