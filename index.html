@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Guia visual e interativo de CI/CD para planejar, versionar, homologar e publicar WebApps do zero ao deploy em produção.">
+  <meta name="description"
+    content="Guia visual e interativo de CI/CD para planejar, versionar, homologar e publicar WebApps do zero ao deploy em produção.">
   <meta name="theme-color" content="#060913">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060913'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%2300ffa7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060913'/%3E%3Cpath d='M8 17l5 5 11-12' fill='none' stroke='%2300ffa7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <title>Guia Interativo CI/CD para WebApps</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -20,7 +22,8 @@
         <span>Template · CI/CD WebApps</span>
       </div>
       <div class="progress-widget">
-        <span class="progress-text">Progresso do Guia: <strong id="progress-count">0/14</strong> (<span id="progress-percent">0%</span>)</span>
+        <span class="progress-text">Progresso do Guia: <strong id="progress-count">0/14</strong> (<span
+            id="progress-percent">0%</span>)</span>
         <div class="progress-bar-track">
           <div class="progress-bar-fill" id="progress-bar-fill"></div>
         </div>
@@ -33,7 +36,8 @@
     <div class="hero-stamp-wrapper">
       <picture>
         <source srcset="assets/selo-aprovado.webp" type="image/webp">
-        <img class="hero-stamp" src="Selo aprovado com caricatura alegre.png" alt="Selo aprovado com caricatura alegre" width="180" height="180" fetchpriority="high">
+        <img class="hero-stamp" src="Selo aprovado com caricatura alegre.png" alt="Selo aprovado com caricatura alegre"
+          width="180" height="180" fetchpriority="high">
       </picture>
     </div>
     <div class="badge">
@@ -42,7 +46,7 @@
     </div>
     <h1 class="hero-title">Guia Prático de <span>CI/CD para WebApps</span></h1>
     <p class="hero-copy">
-      Um passo a passo visual, organizado e interativo para transformar seu template em uma aplicação real. 
+      Um passo a passo visual, organizado e interativo para transformar seu template em uma aplicação real.
       Navegue pelas 4 fases: preparação, design, código e deploy com isolamento total entre homologação e produção.
     </p>
     <div class="meta-grid">
@@ -54,20 +58,22 @@
 
   <!-- Main Grid Layout: Sidebar TOC + Content -->
   <div class="container">
-    
+
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div class="search-box">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <input type="text" id="search-input" class="search-input" placeholder="Buscar etapa ou comando (ex: git)..." aria-label="Buscar no guia">
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar etapa ou comando (ex: git)..."
+          aria-label="Buscar no guia">
       </div>
 
       <nav class="toc-card" aria-label="Navegação da página">
         <h2>Índice do Guia <span id="toc-total-badge">16 Etapas</span></h2>
-        
+
         <ul class="toc-list" id="toc-list">
           <li class="toc-phase-header">Início</li>
           <li><a href="#visao-geral"><span class="toc-item-number">01</span> Visão geral</a></li>
@@ -109,7 +115,8 @@
         <div class="section-header-row">
           <div>
             <h2>Construir um WebApp real com processo profissional</h2>
-            <p class="section-sub">O template organiza a jornada inteira: máquina, contas, escopo, banco, branches, homologação e produção.</p>
+            <p class="section-sub">O template organiza a jornada inteira: máquina, contas, escopo, banco, branches,
+              homologação e produção.</p>
           </div>
         </div>
 
@@ -168,10 +175,13 @@
         <div class="section-header-row">
           <div>
             <h2>Pré-requisitos no Windows do zero</h2>
-            <p class="section-sub">A preparação do ambiente vem antes do código para evitar falhas de permissão, certificados e ferramentas incompletas.</p>
+            <p class="section-sub">A preparação do ambiente vem antes do código para evitar falhas de permissão,
+              certificados e ferramentas incompletas.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -192,19 +202,23 @@
             <h3>2. Instalar navegador moderno</h3>
             <p>Escolha um navegador principal para gerenciar os painéis do projeto:</p>
             <div class="browser-grid" aria-label="Opções de navegadores">
-              <a class="browser-link chrome" href="https://www.google.com/chrome" target="_blank" rel="noopener" aria-label="Baixar Google Chrome">
+              <a class="browser-link chrome" href="https://www.google.com/chrome" target="_blank" rel="noopener"
+                aria-label="Baixar Google Chrome">
                 <span class="browser-logo"><img src="assets/icons/chrome.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Chrome</span>
               </a>
-              <a class="browser-link edge" href="https://www.microsoft.com/edge" target="_blank" rel="noopener" aria-label="Baixar Microsoft Edge">
+              <a class="browser-link edge" href="https://www.microsoft.com/edge" target="_blank" rel="noopener"
+                aria-label="Baixar Microsoft Edge">
                 <span class="browser-logo"><img src="assets/icons/edge.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Edge</span>
               </a>
-              <a class="browser-link firefox" href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener" aria-label="Baixar Mozilla Firefox">
+              <a class="browser-link firefox" href="https://www.mozilla.org/firefox/new/" target="_blank" rel="noopener"
+                aria-label="Baixar Mozilla Firefox">
                 <span class="browser-logo"><img src="assets/icons/firefox.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Firefox</span>
               </a>
-              <a class="browser-link opera" href="https://www.opera.com/download" target="_blank" rel="noopener" aria-label="Baixar Opera">
+              <a class="browser-link opera" href="https://www.opera.com/download" target="_blank" rel="noopener"
+                aria-label="Baixar Opera">
                 <span class="browser-logo"><img src="assets/icons/opera.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Opera</span>
               </a>
@@ -215,27 +229,33 @@
             <h3>3. Criar contas do projeto</h3>
             <p>Crie uma conta de serviço no Proton Mail para o projeto e acesse as plataformas necessárias:</p>
             <div class="browser-grid app-grid" aria-label="Aplicativos e plataformas do projeto">
-              <a class="browser-link app-link protonmail" href="https://proton.me/mail" target="_blank" rel="noopener" aria-label="Abrir Proton Mail">
+              <a class="browser-link app-link protonmail" href="https://proton.me/mail" target="_blank" rel="noopener"
+                aria-label="Abrir Proton Mail">
                 <span class="browser-logo"><img src="assets/icons/protonmail.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Proton Mail</span>
               </a>
-              <a class="browser-link app-link github" href="https://github.com" target="_blank" rel="noopener" aria-label="Abrir GitHub">
+              <a class="browser-link app-link github" href="https://github.com" target="_blank" rel="noopener"
+                aria-label="Abrir GitHub">
                 <span class="browser-logo"><img src="assets/icons/github.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">GitHub</span>
               </a>
-              <a class="browser-link app-link supabase" href="https://supabase.com" target="_blank" rel="noopener" aria-label="Abrir Supabase">
+              <a class="browser-link app-link supabase" href="https://supabase.com" target="_blank" rel="noopener"
+                aria-label="Abrir Supabase">
                 <span class="browser-logo"><img src="assets/icons/supabase.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Supabase</span>
               </a>
-              <a class="browser-link app-link vercel" href="https://vercel.com" target="_blank" rel="noopener" aria-label="Abrir Vercel">
+              <a class="browser-link app-link vercel" href="https://vercel.com" target="_blank" rel="noopener"
+                aria-label="Abrir Vercel">
                 <span class="browser-logo"><img src="assets/icons/vercel.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Vercel</span>
               </a>
-              <a class="browser-link app-link claude" href="https://claude.ai" target="_blank" rel="noopener" aria-label="Abrir Claude">
+              <a class="browser-link app-link claude" href="https://claude.ai" target="_blank" rel="noopener"
+                aria-label="Abrir Claude">
                 <span class="browser-logo"><img src="assets/icons/claude.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Claude</span>
               </a>
-              <a class="browser-link app-link googleaistudio" href="https://aistudio.google.com" target="_blank" rel="noopener" aria-label="Abrir Google AI Studio">
+              <a class="browser-link app-link googleaistudio" href="https://aistudio.google.com" target="_blank"
+                rel="noopener" aria-label="Abrir Google AI Studio">
                 <span class="browser-logo"><img src="assets/icons/googleaistudio.svg" alt="" loading="lazy"></span>
                 <span class="browser-name">Google AI Studio</span>
               </a>
@@ -247,24 +267,31 @@
           <article class="card">
             <h3>⚙️ Ferramentas Base</h3>
             <ul>
-              <li><a href="https://git-scm.com/download/win" target="_blank" rel="noopener"><strong>Git</strong></a> com instalação padrão</li>
-              <li><a href="https://cli.github.com/" target="_blank" rel="noopener"><strong>GitHub CLI (`gh`)</strong></a> para autenticação no terminal</li>
-              <li><a href="https://nodejs.org/" target="_blank" rel="noopener"><strong>Node.js LTS</strong></a> (não escolha a opção do Chocolatey)</li>
-              <li><a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701" target="_blank" rel="noopener"><strong>Windows Terminal</strong></a> recomendado</li>
+              <li><a href="https://git-scm.com/download/win" target="_blank" rel="noopener"><strong>Git</strong></a> com
+                instalação padrão</li>
+              <li><a href="https://cli.github.com/" target="_blank" rel="noopener"><strong>GitHub CLI
+                    (`gh`)</strong></a> para autenticação no terminal</li>
+              <li><a href="https://nodejs.org/" target="_blank" rel="noopener"><strong>Node.js LTS</strong></a> (não
+                escolha a opção do Chocolatey)</li>
+              <li><a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701" target="_blank"
+                  rel="noopener"><strong>Windows Terminal</strong></a> recomendado</li>
             </ul>
           </article>
           <article class="card">
             <h3>💻 Ferramentas de Trabalho</h3>
             <ul>
-              <li><a href="https://antigravity.google/" target="_blank" rel="noopener"><strong>Antigravity IDE</strong></a> como ambiente principal</li>
-              <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener"><strong>Docker Desktop</strong></a> com suporte a WSL 2</li>
+              <li><a href="https://antigravity.google/" target="_blank" rel="noopener"><strong>Antigravity
+                    IDE</strong></a> como ambiente principal</li>
+              <li><a href="https://www.docker.com/products/docker-desktop" target="_blank" rel="noopener"><strong>Docker
+                    Desktop</strong></a> com suporte a WSL 2</li>
               <li>Reinicie o computador após a instalação do Docker</li>
             </ul>
           </article>
         </div>
 
         <div class="callout warn">
-          💡 <strong>Dica:</strong> Anote suas credenciais em um lugar seguro e de fácil acesso (ex: Notepad ou Notion) para acelerar a rotina.
+          💡 <strong>Dica:</strong> Anote suas credenciais em um lugar seguro e de fácil acesso (ex: Notepad ou Notion)
+          para acelerar a rotina.
         </div>
 
         <div class="code-block">
@@ -287,10 +314,13 @@ docker --version</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Isolamento total do projeto</h2>
-            <p class="section-sub">Antes de escrever telas ou código, o processo exige isolamento de identidade e banco de dados.</p>
+            <p class="section-sub">Antes de escrever telas ou código, o processo exige isolamento de identidade e banco
+              de dados.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -298,7 +328,8 @@ docker --version</code></pre>
         <div class="grid-2">
           <article class="card">
             <h3>📧 E-mail Exclusivo</h3>
-            <p>Utilize um provedor como o <a href="https://proton.me/mail" target="_blank" rel="noopener">Proton Mail</a>:</p>
+            <p>Utilize um provedor como o <a href="https://proton.me/mail" target="_blank" rel="noopener">Proton
+                Mail</a>:</p>
             <div class="soft-box" style="margin: 12px 0;">
               <code>todoapp.dev@proton.me</code>
             </div>
@@ -311,7 +342,8 @@ docker --version</code></pre>
 
           <article class="card">
             <h3>🗄️ Dois Projetos no Supabase</h3>
-            <p><a href="https://supabase.com/dashboard/projects" target="_blank" rel="noopener">Crie dois projetos independentes no Dashboard</a>:</p>
+            <p><a href="https://supabase.com/dashboard/projects" target="_blank" rel="noopener">Crie dois projetos
+                independentes no Dashboard</a>:</p>
             <ul>
               <li class="no-task"><strong>Supabase Homologação (HML)</strong></li>
               <li class="no-task"><strong>Supabase Produção (PROD)</strong></li>
@@ -321,7 +353,8 @@ docker --version</code></pre>
         </div>
 
         <div class="callout warn">
-          ⚠️ <strong>Regra de Segurança:</strong> Homologação e Produção devem possuir chaves de API, credenciais e bancos totalmente isolados.
+          ⚠️ <strong>Regra de Segurança:</strong> Homologação e Produção devem possuir chaves de API, credenciais e
+          bancos totalmente isolados.
         </div>
       </section>
 
@@ -339,31 +372,41 @@ docker --version</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Prototipação visual e design system</h2>
-            <p class="section-sub">Busque referências visuais, extraia paleta de cores e valide os fluxos antes do backend.</p>
+            <p class="section-sub">Busque referências visuais, extraia paleta de cores e valide os fluxos antes do
+              backend.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
 
         <ol class="steps">
           <li>
-            <span class="step-text">Buscar referências visuais em plataformas como <a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a>, Pinterest, Awwwards e <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a></span>
+            <span class="step-text">Buscar referências visuais em plataformas como <a href="https://dribbble.com"
+                target="_blank" rel="noopener">Dribbble</a>, <a href="https://pinterest.com" target="_blank"
+                rel="noopener">Pinterest</a>, <a href="https://awwwards.com" target="_blank" rel="noopener">Awwwards</a>
+              e <a href="https://21st.dev" target="_blank" rel="noopener">21st.dev</a>.</span>
           </li>
           <li>
-            <span class="step-text">Definir paleta de cores, hierarquia tipográfica, espaçamento e componentes reutilizáveis</span>
+            <span class="step-text">Definir paleta de cores, hierarquia tipográfica, espaçamento e componentes
+              reutilizáveis</span>
           </li>
           <li>
-            <span class="step-text">Criar o protótipo funcional no <a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a> (Opcional)</span>
+            <span class="step-text">Criar o protótipo funcional no <a href="https://aistudio.google.com" target="_blank"
+                rel="noopener">Google AI Studio</a> (Opcional)</span>
           </li>
           <li>
-            <span class="step-text">Validar visualmente a experiência do usuário (UX) sem necessidade de backend ou deploy prévio</span>
+            <span class="step-text">Validar visualmente a experiência do usuário (UX) sem necessidade de backend ou
+              deploy prévio</span>
           </li>
         </ol>
 
         <div class="callout ok">
-          ✨ <strong>Ordem Recomendada:</strong> Primeiro a UX e o Design System, depois o código. Essa prática economiza horas de refatoração.
+          ✨ <strong>Ordem Recomendada:</strong> Primeiro a UX e o Design System, depois o código. Essa prática economiza
+          horas de refatoração.
         </div>
       </section>
 
@@ -373,10 +416,13 @@ docker --version</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Ideação com IA sem escrever código</h2>
-            <p class="section-sub">Defina o escopo funcional, regras de negócio, estrutura de telas e arquitetura de dados.</p>
+            <p class="section-sub">Defina o escopo funcional, regras de negócio, estrutura de telas e arquitetura de
+              dados.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -384,7 +430,9 @@ docker --version</code></pre>
         <p>Ferramenta sugerida: <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
 
         <div class="callout info">
-          💡 Para comparar modelos de IA e desempenho em código, consulte o <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener">LM Arena Leaderboard</a> e o <a href="https://artificialanalysis.ai" target="_blank" rel="noopener">Artificial Analysis</a>.
+          💡 Para comparar modelos de IA e desempenho em código, consulte o <a href="https://arena.ai/leaderboard"
+            target="_blank" rel="noopener">LM Arena Leaderboard</a> e o <a href="https://artificialanalysis.ai"
+            target="_blank" rel="noopener">Artificial Analysis</a>.
         </div>
 
         <div class="code-block">
@@ -406,12 +454,16 @@ Crie um PRD.md com todo o prompt</code></pre>
         </div>
 
         <div class="callout warn">
-          🎙️ <strong>Aceleração por voz (Bônus):</strong> Experimente ferramentas de digitação por voz como <a href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>, <a href="https://amical.ai" target="_blank" rel="noopener">Amical</a> ou <a href="https://handy.computer" target="_blank" rel="noopener">Handy</a> para ditar seus prompts.
+          🎙️ <strong>Aceleração por voz (Bônus):</strong> Experimente ferramentas de digitação por voz como <a
+            href="https://wisprflow.ai/r?RAFAEL760" target="_blank" rel="noopener">Wispr Flow</a>, <a
+            href="https://amical.ai" target="_blank" rel="noopener">Amical</a> ou <a href="https://handy.computer"
+            target="_blank" rel="noopener">Handy</a> para ditar seus prompts.
         </div>
 
         <article class="card" style="margin-top: 24px;">
           <h3>📁 Próximo Passo no Windows Explorer</h3>
-          <p>Crie uma pasta com o nome do projeto no seu computador e salve dentro dela o arquivo <code>PRD.md</code> gerado pela IA.</p>
+          <p>Crie uma pasta com o nome do projeto no seu computador e salve dentro dela o arquivo <code>PRD.md</code>
+            gerado pela IA.</p>
           <figure class="explorer-example" aria-label="Exemplo de pasta no Windows Explorer">
             <img src="assets/icons/windows-folder.svg" alt="Ícone de pasta do Windows Explorer" width="80" height="65">
             <figcaption>Exemplo visual da estrutura onde você salvará a pasta do projeto.</figcaption>
@@ -425,10 +477,13 @@ Crie um PRD.md com todo o prompt</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Especificação do WebApp de Exemplo</h2>
-            <p class="section-sub">O modelo utiliza um To-Do App para exemplificar regras de banco, autenticação e segurança.</p>
+            <p class="section-sub">O modelo utiliza um To-Do App para exemplificar regras de banco, autenticação e
+              segurança.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -469,7 +524,9 @@ Crie um PRD.md com todo o prompt</code></pre>
           <article class="card">
             <h3>🔒 Segurança e RLS</h3>
             <ul>
-              <li class="no-task">RLS (Row Level Security) em <code>profiles</code>, <code>categories</code> e <code>tasks</code></li>
+              <li class="no-task">RLS (Row Level Security) em <code>profiles</code>, <code>categories</code> e
+                <code>tasks</code>
+              </li>
               <li class="no-task">Bucket de Storage privado para anexos</li>
               <li class="no-task">Policies por usuário em banco e storage</li>
               <li class="no-task">Gerenciamento de sessão pelo Supabase Auth</li>
@@ -492,10 +549,13 @@ Crie um PRD.md com todo o prompt</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Desenvolvimento no Antigravity e uso do MCP</h2>
-            <p class="section-sub">Conecte a IDE Antigravity ao Supabase de Homologação usando o Model Context Protocol (MCP).</p>
+            <p class="section-sub">Conecte a IDE Antigravity ao Supabase de Homologação usando o Model Context Protocol
+              (MCP).</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -504,7 +564,8 @@ Crie um PRD.md com todo o prompt</code></pre>
           <article class="card">
             <h3>🤖 Antigravity IDE</h3>
             <ul>
-              <li>Abra o projeto no <a href="https://antigravity.google/" target="_blank" rel="noopener">Antigravity</a></li>
+              <li>Abra o projeto no <a href="https://antigravity.google/" target="_blank" rel="noopener">Antigravity</a>
+              </li>
               <li>Utilize o assistente de código como centro do seu workflow</li>
             </ul>
           </article>
@@ -542,7 +603,9 @@ Crie um PRD.md com todo o prompt</code></pre>
             <p class="section-sub">Configure o Git com uma estrutura clara de branches para separação de ambientes.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -587,10 +650,13 @@ git config user.email "seu-email-do-projeto@proton.me"</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Configuração correta do Supabase CLI</h2>
-            <p class="section-sub">O CLI deve ser inicializado dentro do projeto local via <code>npx</code>, sem instalação global.</p>
+            <p class="section-sub">O CLI deve ser inicializado dentro do projeto local via <code>npx</code>, sem
+              instalação global.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -607,7 +673,8 @@ npx supabase link --project-ref SEU_PROJECT_REF_HML</code></pre>
         </div>
 
         <div class="callout ok">
-          💡 <strong>Regra de Ouro:</strong> Se o comando começa com <code>npx</code>, ele pertence ao pacote do projeto e garante consistência entre membros da equipe.
+          💡 <strong>Regra de Ouro:</strong> Se o comando começa com <code>npx</code>, ele pertence ao pacote do projeto
+          e garante consistência entre membros da equipe.
         </div>
       </section>
 
@@ -617,10 +684,13 @@ npx supabase link --project-ref SEU_PROJECT_REF_HML</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Banco de dados, migrations e variáveis</h2>
-            <p class="section-sub">Crie alterações de esquema via migrations SQL versionadas e configure as variáveis de ambiente.</p>
+            <p class="section-sub">Crie alterações de esquema via migrations SQL versionadas e configure as variáveis de
+              ambiente.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -680,7 +750,9 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key</code></pre>
             <p class="section-sub">Organização recomendada para um WebApp moderno, rápido e escalável.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -758,10 +830,13 @@ export const supabase = createClientComponentClient&lt;Database&gt;()</code></pr
         <div class="section-header-row">
           <div>
             <h2>Homologação com CI/CD e Pull Request</h2>
-            <p class="section-sub">Valide as alterações em um ambiente de preview isolado antes de enviar para produção.</p>
+            <p class="section-sub">Valide as alterações em um ambiente de preview isolado antes de enviar para produção.
+            </p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -778,11 +853,13 @@ git push origin develop</code></pre>
         </div>
 
         <div class="callout info">
-          🚀 O push na branch <strong>develop</strong> faz a Vercel gerar automaticamente uma URL de <strong>Preview Deployment</strong> para testes em homologação.
+          🚀 O push na branch <strong>develop</strong> faz a Vercel gerar automaticamente uma URL de <strong>Preview
+            Deployment</strong> para testes em homologação.
         </div>
 
         <div class="inline-links">
-          <a href="https://vercel.com/docs/deployments/preview-deployments" target="_blank" rel="noopener">Documentação Vercel Previews</a>
+          <a href="https://vercel.com/docs/deployments/preview-deployments" target="_blank" rel="noopener">Documentação
+            Vercel Previews</a>
         </div>
 
         <div class="code-block">
@@ -801,10 +878,13 @@ git push origin develop</code></pre>
         <div class="section-header-row">
           <div>
             <h2>Produção e validação pós-deploy</h2>
-            <p class="section-sub">Após aprovação em homologação, execute o merge controlado para a branch principal.</p>
+            <p class="section-sub">Após aprovação em homologação, execute o merge controlado para a branch principal.
+            </p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -843,7 +923,9 @@ npx supabase db push</code></pre>
             <p class="section-sub">Estratégia para resposta rápida a incidentes e monitoração de disponibilidade.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -852,7 +934,9 @@ npx supabase db push</code></pre>
           <article class="card">
             <h3>↺ Rollback</h3>
             <ul>
-              <li><strong>Frontend:</strong> Reverter versão instantaneamente no dashboard da <a href="https://vercel.com/docs/deployments/rollback-a-deployment" target="_blank" rel="noopener">Vercel</a></li>
+              <li><strong>Frontend:</strong> Reverter versão instantaneamente no dashboard da <a
+                  href="https://vercel.com/docs/deployments/rollback-a-deployment" target="_blank"
+                  rel="noopener">Vercel</a></li>
               <li><strong>Banco:</strong> Aplicar correção via nova migration SQL reversa</li>
             </ul>
           </article>
@@ -893,7 +977,9 @@ npx supabase db push</code></pre>
             <p class="section-sub">Pilares fundamentais para manter a saúde e integridade do seu projeto.</p>
           </div>
           <button type="button" class="step-toggle-btn" aria-label="Marcar etapa como concluída">
-            <svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            <svg viewBox="0 0 24 24">
+              <path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
             <span class="toggle-text">Concluir Etapa</span>
           </button>
         </div>
@@ -927,47 +1013,78 @@ npx supabase db push</code></pre>
       <section id="referencias" class="step-section" data-step-id="referencias">
         <div class="eyebrow">Referências</div>
         <h2>Canais recomendados para continuar estudando</h2>
-        <p class="section-sub">Conteúdos de alto nível sobre Inteligência Artificial, desenvolvimento web e automação.</p>
+        <p class="section-sub">Conteúdos de alto nível sobre Inteligência Artificial, desenvolvimento web e automação.
+        </p>
 
         <div class="browser-grid app-grid" aria-label="Canais recomendados no YouTube">
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@Itssssss_Jack" target="_blank" rel="noopener" aria-label="Abrir canal Jack Roberts">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@Itssssss_Jack" target="_blank"
+            rel="noopener" aria-label="Abrir canal Jack Roberts">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Jack Roberts</span>
           </a>
 
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@RoboNuggets" target="_blank" rel="noopener" aria-label="Abrir canal RoboNuggets">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@RoboNuggets" target="_blank"
+            rel="noopener" aria-label="Abrir canal RoboNuggets">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Jay E | RoboNuggets</span>
           </a>
 
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@EliRigobeliAI" target="_blank" rel="noopener" aria-label="Abrir canal Eli Rigobeli - IA">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@EliRigobeliAI" target="_blank"
+            rel="noopener" aria-label="Abrir canal Eli Rigobeli - IA">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Eli Rigobeli - IA</span>
           </a>
 
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@MatheusBattisti" target="_blank" rel="noopener" aria-label="Abrir canal Matheus Battisti">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@MatheusBattisti" target="_blank"
+            rel="noopener" aria-label="Abrir canal Matheus Battisti">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Matheus Battisti</span>
           </a>
 
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@promovaweb" target="_blank" rel="noopener" aria-label="Abrir canal Promovaweb">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@promovaweb" target="_blank"
+            rel="noopener" aria-label="Abrir canal Promovaweb">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Promovaweb IA</span>
           </a>
 
-          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@nateherk" target="_blank" rel="noopener" aria-label="Abrir canal Nate Herk">
+          <a class="browser-link app-link youtube-ref" href="https://www.youtube.com/@nateherk" target="_blank"
+            rel="noopener" aria-label="Abrir canal Nate Herk">
             <span class="browser-logo">
-              <svg viewBox="0 0 24 24" role="img"><path fill="#ff4d4d" d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z"/><path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z"/></svg>
+              <svg viewBox="0 0 24 24" role="img">
+                <path fill="#ff4d4d"
+                  d="M23 12c0 3.11-.36 5.07-.65 6.08a2.98 2.98 0 0 1-2.09 2.09C19.24 20.46 17.28 20.82 12 20.82s-7.24-.36-8.26-.65a2.98 2.98 0 0 1-2.09-2.09C1.36 17.07 1 15.11 1 12s.36-5.07.65-6.08a2.98 2.98 0 0 1 2.09-2.09C4.76 3.54 6.72 3.18 12 3.18s7.24.36 8.26.65a2.98 2.98 0 0 1 2.09 2.09c.29 1.01.65 2.97.65 6.08Z" />
+                <path fill="#fff" d="m10 8.5 6 3.5-6 3.5v-7Z" />
+              </svg>
             </span>
             <span class="browser-name">Nate Herk | AI</span>
           </a>
@@ -982,7 +1099,9 @@ npx supabase db push</code></pre>
 
   <!-- Floating Back to Top Button -->
   <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">
-    <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z"/></svg>
+    <svg viewBox="0 0 24 24">
+      <path d="M12 4l-8 8h6v8h4v-8h6z" />
+    </svg>
   </button>
 
   <script src="assets/js/main.js" defer></script>
