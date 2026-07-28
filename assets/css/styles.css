@@ -940,27 +940,111 @@ code {
   font-weight: 700;
 }
 
-/* Windows Explorer Preview Box */
-.explorer-example {
-  margin: 20px 0 0;
+/* Project Folder Preview Component */
+.project-folder-preview {
+  margin-top: 18px;
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-highlight);
   border-radius: var(--radius-md);
-  background: radial-gradient(circle at top left, rgba(255, 224, 122, 0.1), transparent 60%), var(--bg-surface-2);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(10, 15, 36, 0.8));
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 }
 
-.explorer-example img {
-  width: 80px;
-  height: auto;
-  flex: 0 0 auto;
+.folder-3d-wrapper {
+  flex: 0 0 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.explorer-example figcaption {
-  color: var(--text-muted);
+.folder-3d-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(0, 255, 167, 0.3));
+  transition: transform var(--transition-normal);
+}
+
+.folder-3d-wrapper:hover .folder-3d-img {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.folder-tree-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.folder-name {
+  font-family: var(--font-mono);
   font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.folder-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--accent-faint);
+  color: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 255, 167, 0.2);
+}
+
+.tree-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.tree-row.highlight {
+  background: rgba(0, 255, 167, 0.06);
+  border-left: 3px solid var(--accent-primary);
+}
+
+.tree-bullet {
+  color: var(--text-dim);
+}
+
+.file-name {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+.tree-row.highlight .file-name {
+  color: var(--accent-primary);
+}
+
+.file-tag {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-body);
 }
 
 /* Toast Notification */
